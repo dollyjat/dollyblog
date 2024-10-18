@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+   <title>React Hooks - UseEffect</title>
+
+   
+   <meta name="description" content="React hook that enables you to perform side effects in functional components. Side effects are operations that affect">
+
+   
+   <meta name="keywords" content="React, Beginner Developers, JavaScript, Web Development, ReactHooks">
+
+   
+   <meta name="author" content="John Doe">
+
+   
+   <link rel="canonical" href="http://localhost:3000/blog/react-hooks-useeffect">
+
+   
+   <meta property="og:title" content="React Hooks - UseEffect">
+   <meta property="og:description" content="React hook that enables you to perform side effects in functional components. Side effects are operations that affect">
+   <meta property="og:image" content="http://localhost:3000/images/react-hooks-useeffect.jpg">
+   <meta property="og:url" content="http://localhost:3000/blog/react-hooks-useeffect">
+   <meta property="og:type" content="article">
+
+   
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="React Hooks - UseEffect">
+   <meta name="twitter:description" content="React hook that enables you to perform side effects in functional components. Side effects are operations that affect">
+   <meta name="twitter:image" content="http://localhost:3000/images/react-hooks-useeffect.jpg">
+   <link rel="shortcut icon" href="\assets\favicon.ico" type="image/x-icon">
+   <link rel="stylesheet" href="\assets\main.css" type="text/css">
+   <link rel="stylesheet" id="hljs-theme"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/a11y-dark.min.css">
+</head>
+
+<body class="bg-bg text-text">
+   <div class="mx-auto flex flex-col items-center pb-8">
+   <div class="flex px-5 justify-between sm:px-0 sm:justify-evenly items-center mb-5 bg-bg-post sm:mb-10 w-full py-3 ">
+      <a href="/">
+         <h1 class="text-xl sm:text-3xl text-center text-text-nav-logo font-black leading-10">
+            <span class="text-text-nav-logo2">Dolly</span>
+            Blog
+         </h1>
+      </a>
+      <div id="theme-btn">
+         <svg id="svg-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-sun-moon hidden">
+            <path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.9 4.9 1.4 1.4" />
+            <path d="m17.7 17.7 1.4 1.4" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.3 17.7-1.4 1.4" />
+            <path d="m19.1 4.9-1.4 1.4" />
+         </svg>
+         <svg id="svg-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-moon hidden">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+         </svg>
+      </div>
+   </div>
+   <div class="flex w-11/12 md:w-8/12 xl:w-6/12 flex-col">
+      <form class="flex rounded-md w-full" action="/searching/index.html" method="GET">
+         <input type="text" name="s" aria-label="Search keyword"
+            class="w-full p-3 bg-bg rounded-md focus:bg-bg rounded-r-none border-2 border-violet-700 outline-none placeholder-current"
+            placeholder="search post and tag" />
+         <button type="submit"
+            class="inline-flex items-center gap-2 bg-violet-700 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+            <svg class="text-gray-200 h-5 w-5 p-0 fill-current" xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 56.966 56.966">
+               <path
+                  d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17s-17-7.626-17-17S14.61,6,23.984,6z" />
+            </svg>
+         </button>
+      </form>
+   </div>
+</div>
+   <div class="max-w-3xl mx-auto p-2 sm:p-0 markdown">
+   <h2 id="introduction">Introduction</h2>
+<p>Hey guys, In our last article, we learnt about state(specifically useState) and also build a mini project. In this article, we’ll be talking about React hooks and talking more about the useEffect hook. Let’s dive right in 😉</p>
+<h3 id="what-is-useeffect">What is useEffect?</h3>
+<p><code>useEffect</code> is a React hook that enables you to perform side effects in functional components. Side effects are operations that affect the external world, such as data fetching, subscriptions, or manually changing the DOM. Unlike lifecycle methods in class components, <code>useEffect</code> allows you to manage side effects in a declarative and concise manner.</p>
+<h3 id="how-does-it-work">How does it work?</h3>
+<p>Basically, <code>useEffect</code> runs after the render is committed to the screen. It runs after every render by default.</p>
+<p><strong>Basic Syntax</strong></p>
+<p>Here is how the syntax of <code>useEffect</code> look like 👇🏽</p>
+<pre><code class="language-jsx">import { useEffect } from 'react';
+
+const useEffectSyntax = () =&gt; {
+  useEffect(() =&gt; {
+    // Your side effect code here
+    return () =&gt; {
+      // Cleanup code (optional)
+    };
+  }, [/* dependencies */]);
+
+  // Component render logic
+}
+export default useEffectSyntax;
+</code></pre>
+<ul>
+<li>
+<p>The first argument to <code>useEffect</code> is the function containing the side effect code. it is where the main logic of the code lives.</p>
+</li>
+<li>
+<p>The second argument is an array of dependencies. When any of these dependencies change, the effect is re-run.</p>
+</li>
+<li>
+<p>The return function (optional) is used for cleanup. It runs before the component unmounts or when the dependencies change.</p>
+</li>
+</ul>
+<h3 id="examples">Examples</h3>
+<p>Let’s see some basic examples to understand <code>useEffect</code> better;</p>
+<pre><code class="language-jsx">import { useEffect } from 'react';
+
+const SimpleEffectExample = () =&gt; {
+  // useEffect to perform an action on component mount
+  useEffect(() =&gt; {
+    console.log('Component mounted!');
+
+    // Cleanup function (optional)
+    return () =&gt; {
+      console.log('Component will unmount!');
+    };
+  }, []); // Empty dependency array means it runs only once on mount
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;This is a simple component with useEffect.&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default SimpleEffectExample;
+</code></pre>
+<p>From the example above, the <code>useEffect</code> is used to log messages to the console. The function inside it runs after the component is initially rendered. The dependency array <code>[]</code> is empty, meaning the effect runs only once when the component mounts. It simulates the behavior of <code>componentDidMount</code> in class components. Inside the <code>useEffect</code> function:</p>
+<ul>
+<li>
+<p>It logs 'Component mounted!' to the console.</p>
+</li>
+<li>
+<p>It returns a cleanup function that logs 'Component will unmount!' to the console when the component is about to unmount.</p>
+</li>
+</ul>
+<p>Let’s see another example 👇🏽</p>
+<pre><code class="language-jsx">import { useState, useEffect } from 'react';
+
+const SimpleEffectExample = () =&gt; {
+  // State to hold a count value
+  const [count, setCount] = useState(0);
+
+  // useEffect to update the document title
+  useEffect(() =&gt; {
+    document.title = `Count: ${count}`;
+
+    // Cleanup function (optional)
+    return () =&gt; {
+      document.title = 'React App'; // Reset the title on component unmount
+    };
+  }, [count]); // Re-run effect when count changes
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Current Count: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount((prevCount) =&gt; prevCount + 1)}&gt;
+        Increase Count
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default SimpleEffectExample;
+</code></pre>
+<p>From the example above, we have a state variable <code>count</code> initialized to <code>0</code> using <code>useState</code>, and a button to increase the count. The <code>useEffect</code> is used to update the document title with the current count. It takes a function as its first argument, and this function will run after the component renders. The dependency array <code>[count]</code> specifies that the effect should re-run whenever the <code>count</code> state changes. Inside the <code>useEffect</code> function:</p>
+<ul>
+<li>
+<p>We set the document title to include the current count.</p>
+</li>
+<li>
+<p>We return a cleanup function that resets the document title to 'React App' when the component unmounts or when <code>count</code> changes.</p>
+</li>
+</ul>
+<p>The component renders a paragraph displaying the current count and a button. When the button is clicked, the <code>setCount</code> function is called, updating the <code>count</code> state and triggering the <code>useEffect</code> to update the document title.</p>
+<p>Let’s see one more example 👇🏽</p>
+<pre><code class="language-jsx">import { useState, useEffect } from 'react';
+
+const FetchData = () =&gt; {
+  const [data, setData] = useState(null);
+
+  useEffect(() =&gt; {
+    const fetchData = async () =&gt; {
+      const response = await fetch('&lt;https://api.example.com/data&gt;'); // just some dummy api endpoint
+      const result = await response.json();
+      setData(result);
+    };
+
+    fetchData();
+  }, []); // Empty dependency array means it runs only once on mount
+
+  return (
+    &lt;div&gt;
+      {data ? (
+        &lt;ul&gt;
+          {data.map(item =&gt; (
+            &lt;li key={item.id}&gt;{item.name}&lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      ) : (
+        &lt;p&gt;Loading...&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+</code></pre>
+<p>This example is a bit more technical than the previous ones. but we’ll go through it together.</p>
+<p>From the example above, we use the <code>useState</code> hook to create a state variable <code>data</code> and its corresponding updater function <code>setData</code>. The initial value of <code>data</code> is set to <code>null</code>.</p>
+<p>Inside <code>useEffect</code>, an asynchronous function <code>fetchData</code> is declared. This function fetches data from a hypothetical API (<a href="https://api.example.com/data"><code>https://api.example.com/data</code></a>) using the <code>fetch</code> API.</p>
+<p>The <code>fetchData</code> function is then invoked within the <code>useEffect</code>. Because the dependency array is empty (<code>[]</code>), this effect will run only once when the component mounts.</p>
+<p>Once the data is fetched, it is stored in the <code>data</code> state using the <code>setData</code> function.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>That’s all guys, Hope you learned something from this article, Remember that useEffect basically allows you to perform side effects. It’s perfectly fine if you don’t understand it at first. Just try to go over each of the examples.</p>
+<p>Have an amazing weekend and see you next week 😀</p>
+
+</div>
+
+   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+   
+   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/go.min.js"></script>
+
+   <script src="\assets\main.js?v=1"></script>
+
+   <script type="text/javascript">hljs.highlightAll();</script>
+</body>
+
+</html>

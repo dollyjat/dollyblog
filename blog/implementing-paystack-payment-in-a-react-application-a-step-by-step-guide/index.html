@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+   <title>Implementing Paystack Payment in a React Application A Step-by-Step Guide</title>
+
+   
+   <meta name="description" content="Online payment integration is a crucial part of any e-commerce application and it is daunting and confusing to set up sometimes. In this guide">
+
+   
+   <meta name="keywords" content="payment, React, Web Development, Node.js, JavaScript">
+
+   
+   <meta name="author" content="John Doe">
+
+   
+   <link rel="canonical" href="http://localhost:3000/blog/implementing-paystack-payment-in-a-react-application-a-step-by-step-guide">
+
+   
+   <meta property="og:title" content="Implementing Paystack Payment in a React Application A Step-by-Step Guide">
+   <meta property="og:description" content="Online payment integration is a crucial part of any e-commerce application and it is daunting and confusing to set up sometimes. In this guide">
+   <meta property="og:image" content="http://localhost:3000/images/implementing-paystack-payment-in-a-react-application-a-step-by-step-guide.jpg">
+   <meta property="og:url" content="http://localhost:3000/blog/implementing-paystack-payment-in-a-react-application-a-step-by-step-guide">
+   <meta property="og:type" content="article">
+
+   
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="Implementing Paystack Payment in a React Application A Step-by-Step Guide">
+   <meta name="twitter:description" content="Online payment integration is a crucial part of any e-commerce application and it is daunting and confusing to set up sometimes. In this guide">
+   <meta name="twitter:image" content="http://localhost:3000/images/implementing-paystack-payment-in-a-react-application-a-step-by-step-guide.jpg">
+   <link rel="shortcut icon" href="\assets\favicon.ico" type="image/x-icon">
+   <link rel="stylesheet" href="\assets\main.css" type="text/css">
+   <link rel="stylesheet" id="hljs-theme"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/a11y-dark.min.css">
+</head>
+
+<body class="bg-bg text-text">
+   <div class="mx-auto flex flex-col items-center pb-8">
+   <div class="flex px-5 justify-between sm:px-0 sm:justify-evenly items-center mb-5 bg-bg-post sm:mb-10 w-full py-3 ">
+      <a href="/">
+         <h1 class="text-xl sm:text-3xl text-center text-text-nav-logo font-black leading-10">
+            <span class="text-text-nav-logo2">Dolly</span>
+            Blog
+         </h1>
+      </a>
+      <div id="theme-btn">
+         <svg id="svg-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-sun-moon hidden">
+            <path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.9 4.9 1.4 1.4" />
+            <path d="m17.7 17.7 1.4 1.4" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.3 17.7-1.4 1.4" />
+            <path d="m19.1 4.9-1.4 1.4" />
+         </svg>
+         <svg id="svg-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-moon hidden">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+         </svg>
+      </div>
+   </div>
+   <div class="flex w-11/12 md:w-8/12 xl:w-6/12 flex-col">
+      <form class="flex rounded-md w-full" action="/searching/index.html" method="GET">
+         <input type="text" name="s" aria-label="Search keyword"
+            class="w-full p-3 bg-bg rounded-md focus:bg-bg rounded-r-none border-2 border-violet-700 outline-none placeholder-current"
+            placeholder="search post and tag" />
+         <button type="submit"
+            class="inline-flex items-center gap-2 bg-violet-700 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+            <svg class="text-gray-200 h-5 w-5 p-0 fill-current" xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 56.966 56.966">
+               <path
+                  d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17s-17-7.626-17-17S14.61,6,23.984,6z" />
+            </svg>
+         </button>
+      </form>
+   </div>
+</div>
+   <div class="max-w-3xl mx-auto p-2 sm:p-0 markdown">
+   <h2 id="introduction">Introduction</h2>
+<p>Online payment integration is a crucial part of any e-commerce application and it is daunting and confusing to set up sometimes. In this guide, we'll walk through the process of implementing Paystack payment in a React application. Additionally, we'll cover how to store user orders in a database, enabling users to review their purchases effortlessly. Paystack is a popular payment gateway in Nigeria that allows businesses to accept online payments.</p>
+<h2 id="-prerequisites">🧰 <strong>Prerequisites</strong></h2>
+<p>Before diving into the implementation, ensure you meet the following prerequisites:</p>
+<ul>
+<li>
+<p><strong>Basic Understanding:</strong> Familiarity with React, JavaScript, and TypeScript is necessary to follow the concepts discussed in this guide.</p>
+</li>
+<li>
+<p><strong>Node.js and npm:</strong> Make sure you have Node.js and npm installed on your machine to manage project dependencies.</p>
+</li>
+<li>
+<p><strong>Paystack Account:</strong> Create an account on <a href="https://paystack.com/">Paystack</a> and obtain your API keys. These keys are essential for authenticating your requests with the Paystack API.</p>
+</li>
+<li>
+<p><strong>Database:</strong> Choose a database for storing order information. In this guide, we use MongoDB, but you can opt for any database solution based on your preferences.</p>
+</li>
+<li>
+<p><strong>MongoDB Account:</strong> Sign up for a free account on <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a> to create a MongoDB database for storing orders.</p>
+</li>
+<li>
+<p><strong>Understanding MongoDB and Mongoose:</strong> Basic knowledge of MongoDB and Mongoose, a MongoDB object modeling tool, is required for setting up the database schema.</p>
+</li>
+</ul>
+<p><strong>Note:</strong> Throughout this guide, we'll maintain a focus on security. Ensure you protect sensitive information such as API keys and database credentials. Utilize environment variables and secure storage methods to keep your application secure.</p>
+<p>Before we continue with the article, if you're looking for the code, you can find it on GitHub using the following <a href="https://github.com/dev-lawrence/crafty/tree/main">link.</a></p>
+<h3 id="-setting-up-the-react-paybutton-component">💻 <strong>Setting Up the React PayButton Component</strong></h3>
+<p>First, let's set up the PayButton component in your React application. This component will handle the payment process when the user clicks the 'pay with Paystack' button.</p>
+<pre><code class="language-jsx">import React, { useState } from 'react';
+import axios from 'axios';
+import Spinner from './Spinner';
+import { Product } from '../types/types';
+
+interface PayButtonProps {
+  products: Product[];
+  totalAmount: number;
+}
+
+const email = 'example@example.com'; // Replace this with logic to get user's email
+
+const PayButton: React.FC&lt;PayButtonProps&gt; = ({ products, totalAmount }) =&gt; {
+  const [loading, setLoading] = useState(false);
+
+  const initializePayment = async () =&gt; {
+    setLoading(true);
+    try {
+      // Send a POST request to your server to create a Paystack checkout session
+      const response = await axios.post(
+        '/api/paystack/create-checkout-session',
+        {
+          products: products,
+          amount: totalAmount,
+          email: email,
+        }
+      );
+
+      const { authorizationUrl } = response.data;
+
+      // Open Paystack payment page in a new tab
+      const paymentWindow = window.open(authorizationUrl);
+
+      if (paymentWindow) {
+        const interval = setInterval(() =&gt; {
+          if (paymentWindow.closed) {
+            window.location.href = '/checkout-success';
+            clearInterval(interval);
+          }
+        }, 1000);
+      } else {
+        console.error('Failed to open payment window.');
+      }
+    } catch (error) {
+      console.error('Error initializing payment:', error);
+      // Handle the error, e.g., show a user-friendly error message to the user.
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    &lt;button className=&quot;cta&quot; onClick={initializePayment}&gt;
+      {loading ? &lt;Spinner /&gt; : 'pay with Paystack'}
+    &lt;/button&gt;
+  );
+};
+
+export default PayButton;
+</code></pre>
+<p>In this component, we've created a <code>PayButton</code> that takes the <code>products</code> and <code>totalAmount</code> as props. When the button is clicked, it triggers the <code>initializePayment</code> function, which sends a POST request to your server (containing the products, amount and email) to create a Paystack checkout session. Once the session is created, it opens the Paystack payment page in a new tab. If the payment is successful, the user is redirected to the '/checkout-success' page.</p>
+<p>💡 <em><strong>Note:</strong></em> <em>In the context of Paystack integration, it's essential to emphasize that a valid email address is a mandatory requirement. In this code, an email variable is used for demonstration purposes. However, in a real-world application, this email should ideally be retrieved from your database, ensuring accurate user information.</em></p>
+<h3 id="-setting-up-the-server-side-code">💾 <strong>Setting Up the Server-Side Code</strong></h3>
+<p>Next, let's set up the server-side code to handle the Paystack integration. This code will be responsible for creating the Paystack checkout session.</p>
+<p>Create a new file <code>server.js</code> and install the necessary packages as we’ll be needing them in our code 👇🏽</p>
+<pre><code class="language-javascript">npm install express mongoose dotenv cors body-parser axios crypto
+</code></pre>
+<pre><code class="language-jsx">// server.js
+import express from 'express';
+import bodyParser from 'body-parser';
+import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const app = express();
+app.use(bodyParser.json());
+
+// Paystack secret key
+const secret = process.env.PAYSTACK_SECRET_KEY;
+
+// Create a Paystack checkout session
+app.post('/api/paystack/create-checkout-session', async (req, res) =&gt; {
+  try {
+    const { email, amount, products } = req.body;
+
+    const formattedProducts = products.map((product) =&gt; ({
+      name: product.name,
+      quantity: product.quantity,
+      price: product.price,
+      image: product.image,
+    }));
+
+    const response = await axios.post(
+      '&lt;https://api.paystack.co/transaction/initialize&gt;',
+      {
+        email: email,
+        amount: amount * 100, // Paystack amount is in kobo
+        metadata: {
+          products: formattedProducts,
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${secret}`,
+        },
+      }
+    );
+
+    const authorizationUrl = response.data.data.authorization_url;
+    res.json({ authorizationUrl });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+const port = process.env.PORT || 5000;
+app.listen(port, () =&gt; {
+  console.log(`Server is running on port ${port}`);
+});
+</code></pre>
+<p>In this server-side code, we've created an endpoint: <code>/api/paystack/create-checkout-session</code> to create a Paystack checkout session.</p>
+<p>At this point you should be able to receive the <code>authorizationUrl</code> in your frontend to direct to make payment.</p>
+<p>💡 <em><strong>Note:</strong></em> <em>It's crucial to safeguard your Paystack secret key and server port. Storing sensitive information like secret keys in a</em> <code>.env</code> file enhances security by preventing exposure in public repositories.</p>
+<p>Moving forward, let's enhance functionality by saving user orders to a database. In this scenario, only essential details such as products and amounts will be sent to the database. For a more robust system, consider implementing an authentication mechanism. This enables the inclusion of the logged-in user's <code>userId</code> along with the order data in your application. You can explore further on implementing user authentication through my previous <a href="https://dev.to/devlawrence/sync-clerk-users-to-your-database-using-webhooks-a-step-by-step-guide-263i">article</a>.</p>
+<h3 id="-setting-up-the-database">🏨 <strong>Setting Up the Database</strong></h3>
+<p>Let’s set up our database. We’ll be using mongodb as our database in this article but you can use any database or Headless CMS of your choice.</p>
+<p><strong>Create a MongoDB Atlas Account</strong></p>
+<ol>
+<li>
+<p><strong>Visit MongoDB Atlas:</strong> Go to the <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas website</a> and sign up for a free account if you don't have one already.</p>
+</li>
+<li>
+<p><strong>Create a New Cluster:</strong> Once logged in, create a new cluster. Choose a provider, region, and cluster tier that fits your needs. For development and small projects, the free tier is usually sufficient.</p>
+</li>
+</ol>
+<p><strong>Set Up a Database and Collection</strong></p>
+<ol>
+<li><strong>Create a Database:</strong> Inside your MongoDB Atlas dashboard, click on the &quot;Collections&quot; tab, then click the &quot;Add My Own Data&quot; button. Create a new database and collection for your application. Note down the database name and collection name as you'll need them in your backend code.</li>
+</ol>
+<p><strong>Whitelist IP Address</strong></p>
+<ol>
+<li>
+<p><strong>Whitelist Your IP Address:</strong> In your MongoDB Atlas dashboard, go to the &quot;Network Access&quot; tab. Click on the &quot;Add IP Address&quot; button and add your current IP address to the whitelist. This step ensures that your backend application can connect to the MongoDB database. You should set like this to receive connection from all IP Address 👇🏽</p>
+<pre><code class="language-javascript">0.0.0.0/0
+</code></pre>
+</li>
+</ol>
+<p><strong>Obtain Connection String</strong></p>
+<ol>
+<li><strong>Get Connection String:</strong> In your MongoDB Atlas dashboard, click on the &quot;Clusters&quot; tab, then click the &quot;Connect&quot; button. Choose &quot;Connect your application&quot; and copy the connection string. Replace <code>&lt;password&gt;</code> in the connection string with your MongoDB Atlas password.</li>
+</ol>
+<p><strong>Use Connection String in Your Backend Code</strong></p>
+<p>Now that you have the MongoDB connection string, we can use it in our backend code to connect to the database. we have to store the connection string in the .env file you stored your paystack secret key and port 👇🏽</p>
+<pre><code class="language-javascript">MONGODB_URI = mongodb+srv://your-username:your-password@cluster0.x1tcube.mongodb.net/database-name
+PORT = 5000
+PAYSTACK_SECRET_KEY= put you paystack key here
+</code></pre>
+<p><strong>Define the Order Schema</strong></p>
+<p>Create a new file called <code>orderModel.js</code>, define the schema for your orders. This schema determines the structure of your data in the MongoDB collection</p>
+<pre><code class="language-jsx">
+import mongoose from 'mongoose';
+
+const orderSchema = new mongoose.Schema(
+  {
+    reference: { type: String },
+    products: [
+      {
+        name: { type: String },
+        price: { type: String },
+        quantity: { type: String },
+        image: { type: String },
+      },
+    ],
+    total: { type: Number, required: true },
+    delivery_status: { type: String, default: 'pending' },
+    payment_status: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+
+const Order = mongoose.model('Order', orderSchema);
+
+export default Order;
+</code></pre>
+<p>In this schema:</p>
+<ul>
+<li>
+<p><code>reference</code>: Unique identifier for the order.</p>
+</li>
+<li>
+<p><code>products</code>: An array containing product details for the order.</p>
+</li>
+<li>
+<p><code>total</code>: Total amount of the order.</p>
+</li>
+<li>
+<p><code>delivery_status</code>: Status of the delivery (defaulted to 'pending').</p>
+</li>
+<li>
+<p><code>payment_status</code>: Status of the payment (required field).</p>
+</li>
+<li>
+<p><code>timestamps</code>: Automatic timestamps for <code>createdAt</code> and <code>updatedAt</code></p>
+</li>
+</ul>
+<p>Now you have a <code>Order</code> model that represents the structure of your orders in the MongoDB database. You can use this model to perform various operations such as creating, reading, updating, and deleting orders in your application.</p>
+<p>So let’s implement the changes back in your sever-side code 👇🏽</p>
+<pre><code class="language-jsx">import axios from 'axios';
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import crypto from 'crypto';
+import Order from './orderModel.js';
+
+dotenv.config();
+
+// Connect mongoose to database
+const mongoURI = process.env.MONGODB_URI;
+
+// paystack secret key
+const secret = process.env.PAYSTACK_SECRET_KEY;
+
+mongoose
+  .connect(mongoURI)
+  .then(() =&gt; {
+    console.log('Connected to DB');
+  })
+  .catch((err) =&gt; console.log(err.message));
+
+const app = express();
+
+app.use(cors());
+
+const jsonParserForProducts = express.json();
+
+// route to be corrected
+app.post(
+  '/api/paystack/create-checkout-session',
+  jsonParserForProducts,
+  async function (req, res) {
+    try {
+      const { email, amount, products } = req.body;
+
+      const formattedProducts = products.map((product) =&gt; ({
+        name: product.name,
+        quantity: product.quantity,
+        price: product.price,
+        image: product.image,
+      }));
+
+      const response = await axios.post(
+        '&lt;https://api.paystack.co/transaction/initialize&gt;',
+        {
+          email: email,
+          amount: amount * 100,
+          metadata: {
+            products: formattedProducts,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${secret}`,
+          },
+        }
+      );
+
+      const authorizationUrl = response.data.data.authorization_url;
+
+      res.json({ authorizationUrl });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+);
+
+app.post(
+  '/api/paystack/webhook',
+  bodyParser.raw({ type: 'application/json' }),
+  async function (req, res) {
+    try {
+      // Parse the request body as JSON
+      const body = req.body.toString();
+      const jsonData = JSON.parse(body);
+
+      const hash = crypto
+        .createHmac('sha512', process.env.PAYSTACK_SECRET_KEY)
+        .update(body, 'utf-8')
+        .digest('hex');
+
+      if (hash == req.headers['x-paystack-signature']) {
+        const event = jsonData.event;
+
+        // Handle different Paystack events based on the `event` field
+        if (event === 'charge.success') {
+          const newOrder = new Order({
+            reference: jsonData.data.reference,
+            product: jsonData.data.metadata.products,
+            total: jsonData.data.requested_amount,
+            payment_status: jsonData.data.gateway_response,
+          });
+
+          await newOrder.save();
+
+          res.status(200).send('Success');
+          console.log('Order saved to database');
+        } else {
+          // Handle other Paystack events if needed
+          console.log('Received Paystack event:', event);
+          res.status(200).send('Event not handled');
+        }
+      } else {
+        // Invalid signature, ignore the webhook event
+        console.log('Invalid Paystack signature');
+        res.status(400).send('Invalid signature');
+      }
+    } catch (error) {
+      console.error('Error processing Paystack webhook:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+);
+
+app.get('/api/paystack/orders', jsonParserForProducts, async (req, res) =&gt; {
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 });
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching orders' });
+  }
+});
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () =&gt; {
+  console.log(`Listening on port &lt;http://localhost&gt;:${port}`);
+});
+</code></pre>
+<p>In this server-side code, we've added two more endpoints: <code>/api/paystack/webhook</code> to handle Paystack webhook events and <code>/api/paystack/orders</code> to get the orders. The webhook endpoint verifies the webhook signature and handles the 'charge.success' event by saving the order details to the database.</p>
+<p>But for it work, you have to enable the webhook on your paystack dashboard</p>
+<p>To enable webhooks, go to the settings in your paystack dashboard and click on the <a href="https://dashboard.paystack.com/#/settings/developers">Api and Webhooks</a> button.</p>
+<p>You'll be presented with a form where you can specify the URL of your backend endpoint. This is the URL where paystack will send the webhook events.</p>
+<p>A small consideration here is that your URL must be hosted on a server to function properly, especially in the production stage. However, for local testing purposes, you'll need to expose your local server to the internet. One tool that can assist you with this is ngrok. You can download it <a href="https://ngrok.com/"><strong>here</strong></a>.</p>
+<p>After downloading ngrok and done the installation, open your command prompt and enter the following command: <code>ngrok http 5000</code> (or use the port of your choice). This will establish a connection, and you will receive a link that you need to copy and use as your URL 👇🏽</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1698261826405/b75f7759-fb09-4918-8d61-bce5fe5f6f83.png" alt="" /></p>
+<p>So now your endpoint should look like this 👇🏽</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1698261846240/064a901b-364d-4794-8f1b-907624eae30e.png" alt="" /></p>
+<p><code>https://afc6-197-210-78-134.ngrok.io/api/paystack/webhook</code></p>
+<p>💡 <em>Note: I got the image from my last article that is why the url are difference. 😅</em></p>
+<h3 id="creating-the-checkout-success-and-order-components"><strong>Creating the Checkout Success and Order Components</strong></h3>
+<p>Finally, let's create the components for the checkout success page and the order history page. These components will be displayed to the users after a successful payment.</p>
+<pre><code class="language-jsx">// CheckoutSuccess.js
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const CheckoutSuccess = () =&gt; {
+  return (
+    &lt;div className=&quot;checkout-success&quot;&gt;
+      &lt;h2&gt;Your order has been placed 🚀&lt;/h2&gt;
+      &lt;Link to=&quot;/order&quot; className=&quot;btn-filled&quot;&gt;
+        Check your order
+      &lt;/Link&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default CheckoutSuccess;
+</code></pre>
+<pre><code class="language-jsx">// Order.js
+
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+interface Product {
+  name: string;
+  price: string;
+  quantity: string;
+  image: string;
+  _id: string;
+}
+
+interface OrderItem {
+  _id: string;
+  reference: string;
+  total: number;
+  payment_status: string;
+  delivery_status: string;
+  product: Product[];
+  createdAt: string;
+}
+
+const Order = () =&gt; {
+  const [orders, setOrders] = useState&lt;OrderItem[]&gt;([]);
+
+  useEffect(() =&gt; {
+    axios
+      .get('/api/paystack/orders/')
+      .then((response) =&gt; {
+        setOrders(response.data);
+      })
+      .catch((error) =&gt; {
+        console.error('Error fetching orders:', error);
+      });
+  }, []);
+
+  return (
+    &lt;div className=&quot;orders&quot;&gt;
+      &lt;h2&gt;Orders&lt;/h2&gt;
+      &lt;ul&gt;
+        {orders.map((order) =&gt; (
+          &lt;div className=&quot;order&quot; key={order._id}&gt;
+            &lt;p className=&quot;id&quot;&gt;Order reference: {order.reference}&lt;/p&gt;
+            &lt;p className=&quot;payment-status&quot;&gt;
+              Status: &lt;span className=&quot;status&quot;&gt;{order.payment_status}&lt;/span&gt;
+            &lt;/p&gt;
+            &lt;p className=&quot;delivery-status&quot;&gt;
+              Delivery: &lt;span className=&quot;status&quot;&gt;{order.delivery_status}&lt;/span&gt;
+            &lt;/p&gt;
+            &lt;p className=&quot;createdAt&quot;&gt;
+              Date:{' '}
+              {new Date(order.createdAt).toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'long',
+                day: 'numeric',
+              })}{' '}
+              {new Date(order.createdAt).toLocaleTimeString('en-US', {
+                timeStyle: 'short',
+              })}
+            &lt;/p&gt;
+
+            &lt;div className=&quot;order-flex&quot;&gt;
+              {order.product.map((item) =&gt; (
+                &lt;div key={item._id} className=&quot;item&quot;&gt;
+                  &lt;img src={item.image} alt=&quot;&quot; /&gt;
+                  &lt;div className=&quot;items-details&quot;&gt;
+                    &lt;h4 className=&quot;name&quot;&gt;{item.name}&lt;/h4&gt;
+                    &lt;h4 className=&quot;price&quot;&gt;₦{item.price}&lt;/h4&gt;
+                    &lt;span className=&quot;quantity&quot;&gt;Quantity: {item.quantity} &lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              ))}
+            &lt;/div&gt;
+
+            &lt;p className=&quot;total&quot;&gt;Total: ₦{order.total / 100}&lt;/p&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Order;
+</code></pre>
+<p>In the <code>Order</code> component, you can customize the way you display the order details fetched from the server.</p>
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+<p>Congratulations 🎉 🎉! You have successfully integrated Paystack payment into your React application. Users can now make payments seamlessly, and their orders will be saved in the database for future reference. Feel free to customize the components and styles to match your application's design.</p>
+<p>Remember, this guide provides a basic integration of Paystack payment. Depending on your specific requirements, you might need to add more features or enhance the existing ones. Always refer to the official Paystack documentation for detailed information on their API capabilities and best practices. Let me know in the comment if you have any question</p>
+<p>Till next time 😀</p>
+
+</div>
+
+   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+   
+   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/go.min.js"></script>
+
+   <script src="\assets\main.js?v=1"></script>
+
+   <script type="text/javascript">hljs.highlightAll();</script>
+</body>
+
+</html>

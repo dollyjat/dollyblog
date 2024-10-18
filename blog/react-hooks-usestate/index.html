@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+   <title>React Hooks - UseState</title>
+
+   
+   <meta name="description" content="State is vital for building interactive applications. It enables your components to respond to user interactions, data fetching">
+
+   
+   <meta name="keywords" content="React, Beginner Developers, Tutorial, articles, Web Development">
+
+   
+   <meta name="author" content="John Doe">
+
+   
+   <link rel="canonical" href="http://localhost:3000/blog/react-hooks-usestate">
+
+   
+   <meta property="og:title" content="React Hooks - UseState">
+   <meta property="og:description" content="State is vital for building interactive applications. It enables your components to respond to user interactions, data fetching">
+   <meta property="og:image" content="http://localhost:3000/images/react-hooks-usestate.jpg">
+   <meta property="og:url" content="http://localhost:3000/blog/react-hooks-usestate">
+   <meta property="og:type" content="article">
+
+   
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="React Hooks - UseState">
+   <meta name="twitter:description" content="State is vital for building interactive applications. It enables your components to respond to user interactions, data fetching">
+   <meta name="twitter:image" content="http://localhost:3000/images/react-hooks-usestate.jpg">
+   <link rel="shortcut icon" href="\assets\favicon.ico" type="image/x-icon">
+   <link rel="stylesheet" href="\assets\main.css" type="text/css">
+   <link rel="stylesheet" id="hljs-theme"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/a11y-dark.min.css">
+</head>
+
+<body class="bg-bg text-text">
+   <div class="mx-auto flex flex-col items-center pb-8">
+   <div class="flex px-5 justify-between sm:px-0 sm:justify-evenly items-center mb-5 bg-bg-post sm:mb-10 w-full py-3 ">
+      <a href="/">
+         <h1 class="text-xl sm:text-3xl text-center text-text-nav-logo font-black leading-10">
+            <span class="text-text-nav-logo2">Dolly</span>
+            Blog
+         </h1>
+      </a>
+      <div id="theme-btn">
+         <svg id="svg-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-sun-moon hidden">
+            <path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.9 4.9 1.4 1.4" />
+            <path d="m17.7 17.7 1.4 1.4" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.3 17.7-1.4 1.4" />
+            <path d="m19.1 4.9-1.4 1.4" />
+         </svg>
+         <svg id="svg-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-moon hidden">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+         </svg>
+      </div>
+   </div>
+   <div class="flex w-11/12 md:w-8/12 xl:w-6/12 flex-col">
+      <form class="flex rounded-md w-full" action="/searching/index.html" method="GET">
+         <input type="text" name="s" aria-label="Search keyword"
+            class="w-full p-3 bg-bg rounded-md focus:bg-bg rounded-r-none border-2 border-violet-700 outline-none placeholder-current"
+            placeholder="search post and tag" />
+         <button type="submit"
+            class="inline-flex items-center gap-2 bg-violet-700 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+            <svg class="text-gray-200 h-5 w-5 p-0 fill-current" xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 56.966 56.966">
+               <path
+                  d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17s-17-7.626-17-17S14.61,6,23.984,6z" />
+            </svg>
+         </button>
+      </form>
+   </div>
+</div>
+   <div class="max-w-3xl mx-auto p-2 sm:p-0 markdown">
+   <h2 id="introduction">Introduction</h2>
+<p>Hey guys, In our last article, we learned about props and did a mini-project. In this article, we’ll be talking about the concept of state as well as building a little project. Let’s dive right in 😉</p>
+<h2 id="what-is-state">What is state?</h2>
+<p>In React, <strong>state</strong> basically refers to the data that a component manages which can change over time.</p>
+<p>Imagine you're building a weather app. The temperature at a location is a perfect example of what state represents. It can change throughout the day, and your app needs to keep track of that change and update the display accordingly.</p>
+<p>State is essential for creating dynamic user interfaces because it allows you to store and update information that influences how your components render and behaves.</p>
+<h2 id="importance-of-state">Importance of state</h2>
+<p>State is vital for building interactive applications. It enables your components to respond to user interactions, data fetching, and other events. When the state of a component changes, React automatically re-renders the component, updating the user interface to reflect the new state.</p>
+<p>This dynamic behavior is what makes React so powerful for building modern web applications.</p>
+<h2 id="using-usestate-hook"><strong>Using</strong> <code>useState</code> Hook</h2>
+<p>Like I have said in this series, functional components are the modern way of building UI in React. To manage state in functional components, you can use the <code>useState</code> hook. The <code>useState</code> hook allows you to add state to your functional components easily.</p>
+<p>💡 <em>Hooks are special functions that are only available while React is rendering. They let you “hook into” different React features. - React Docs</em></p>
+<p><em>There are other Hooks apart from</em> <code>useState</code> but we’ll use <code>useState</code> in today’s project.</p>
+<h2 id="how-to-use-usestate-in-react-"><strong>How to Use</strong> <code>useState</code> in React ?</h2>
+<p>I am a project based learner and I also hope you are too. So in order to learn how <code>useState</code> works, we’ll be building this simple counter project together. Let’s get started 👇🏽</p>
+<p><strong>Step 1: Import React and</strong> <code>useState</code> hook</p>
+<pre><code class="language-jsx">import React, { useState } from 'react';
+</code></pre>
+<p>In this line, we import React and the <code>useState</code> hook from the React library. These are necessary for creating functional components and managing state.</p>
+<p><em>You can also decide to remove the React and just import only the</em> <code>useState</code> which will still work just fine.</p>
+<p><strong>Step 2: Initialize State</strong></p>
+<pre><code class="language-jsx">const [count, setCount] = useState(0);
+</code></pre>
+<p>Here, we use the <code>useState</code> hook to initialize a state variable called <code>count</code> with an initial value of <code>0</code>. This is where we'll store and manage our count. and <code>setCount</code> is used to update <code>count</code> by providing a new value.</p>
+<p><strong>Step 3: Create Increment and Decrement Functions</strong></p>
+<pre><code class="language-jsx">function increment() {
+  setCount((prevCount) =&gt; prevCount + 1);
+}
+
+function decrement() {
+  setCount((prevCount) =&gt; prevCount - 1);
+}
+</code></pre>
+<p>We define two functions, <code>increment</code> and <code>decrement</code>, which are called when the corresponding buttons are clicked(which we’ll be creating shortly). Inside these functions, we use the functional form of <code>setCount</code>. This form takes a function as its argument, which receives the previous state value (<code>prevCount</code>) and returns the new state value. By using this approach, we ensure that we're updating the state based on the previous state correctly.</p>
+<p><strong>Step 4: Render the Component</strong></p>
+<pre><code class="language-jsx">return (
+  &lt;div&gt;
+    &lt;h1&gt;Counter&lt;/h1&gt;
+    &lt;p&gt;Count: {count}&lt;/p&gt;
+    &lt;button onClick={increment}&gt;Increment&lt;/button&gt;
+    &lt;button onClick={decrement}&gt;Decrement&lt;/button&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+<p>In the <code>return</code> statement, we define the component's JSX. It displays the current count (<code>{count}</code>), along with two buttons for incrementing and decrementing the count. When these buttons are clicked, the <code>increment</code> and <code>decrement</code> functions are called, updating the state and causing the component to re-render with the new count value.</p>
+<p>Here is the code in full 👇🏽</p>
+<pre><code class="language-jsx">import React, { useState } from 'react';
+
+function Counter() {
+  // Initialize state with a count of 0
+  const [count, setCount] = useState(0);
+
+  // Function to increment the count
+  function increment() {
+    setCount((prevCount) =&gt; prevCount + 1);
+  }
+
+  // Function to decrement the count
+  function decrement() {
+    setCount((prevCount) =&gt; prevCount - 1);
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Counter&lt;/h1&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={increment}&gt;Increment&lt;/button&gt;
+      &lt;button onClick={decrement}&gt;Decrement&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Counter;
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>That’s all guys, Hope you learned something from this article, Remember that State allows you to manage dynamic data within your components, making them responsive to user interactions. As you persist in learning and applying these concepts, they will gradually become more intuitive.</p>
+<p>Have an amazing weekend and see you next week 😀</p>
+
+</div>
+
+   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+   
+   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/go.min.js"></script>
+
+   <script src="\assets\main.js?v=1"></script>
+
+   <script type="text/javascript">hljs.highlightAll();</script>
+</body>
+
+</html>

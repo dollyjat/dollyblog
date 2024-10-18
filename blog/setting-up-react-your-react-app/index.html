@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+   <title>Setting up React your React App</title>
+
+   
+   <meta name="description" content="Node.js is a JavaScript runtime that allows you to execute JavaScript code outside of a web browser. React relies on Node.js">
+
+   
+   <meta name="keywords" content="React, Beginner Developers, JavaScript, Web Development, Developer">
+
+   
+   <meta name="author" content="John Doe">
+
+   
+   <link rel="canonical" href="http://localhost:3000/blog/setting-up-react-your-react-app">
+
+   
+   <meta property="og:title" content="Setting up React your React App">
+   <meta property="og:description" content="Node.js is a JavaScript runtime that allows you to execute JavaScript code outside of a web browser. React relies on Node.js">
+   <meta property="og:image" content="http://localhost:3000/images/setting-up-react-your-react-app.jpg">
+   <meta property="og:url" content="http://localhost:3000/blog/setting-up-react-your-react-app">
+   <meta property="og:type" content="article">
+
+   
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="Setting up React your React App">
+   <meta name="twitter:description" content="Node.js is a JavaScript runtime that allows you to execute JavaScript code outside of a web browser. React relies on Node.js">
+   <meta name="twitter:image" content="http://localhost:3000/images/setting-up-react-your-react-app.jpg">
+   <link rel="shortcut icon" href="\assets\favicon.ico" type="image/x-icon">
+   <link rel="stylesheet" href="\assets\main.css" type="text/css">
+   <link rel="stylesheet" id="hljs-theme"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/a11y-dark.min.css">
+</head>
+
+<body class="bg-bg text-text">
+   <div class="mx-auto flex flex-col items-center pb-8">
+   <div class="flex px-5 justify-between sm:px-0 sm:justify-evenly items-center mb-5 bg-bg-post sm:mb-10 w-full py-3 ">
+      <a href="/">
+         <h1 class="text-xl sm:text-3xl text-center text-text-nav-logo font-black leading-10">
+            <span class="text-text-nav-logo2">Dolly</span>
+            Blog
+         </h1>
+      </a>
+      <div id="theme-btn">
+         <svg id="svg-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-sun-moon hidden">
+            <path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.9 4.9 1.4 1.4" />
+            <path d="m17.7 17.7 1.4 1.4" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.3 17.7-1.4 1.4" />
+            <path d="m19.1 4.9-1.4 1.4" />
+         </svg>
+         <svg id="svg-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-moon hidden">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+         </svg>
+      </div>
+   </div>
+   <div class="flex w-11/12 md:w-8/12 xl:w-6/12 flex-col">
+      <form class="flex rounded-md w-full" action="/searching/index.html" method="GET">
+         <input type="text" name="s" aria-label="Search keyword"
+            class="w-full p-3 bg-bg rounded-md focus:bg-bg rounded-r-none border-2 border-violet-700 outline-none placeholder-current"
+            placeholder="search post and tag" />
+         <button type="submit"
+            class="inline-flex items-center gap-2 bg-violet-700 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+            <svg class="text-gray-200 h-5 w-5 p-0 fill-current" xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 56.966 56.966">
+               <path
+                  d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17s-17-7.626-17-17S14.61,6,23.984,6z" />
+            </svg>
+         </button>
+      </form>
+   </div>
+</div>
+   <div class="max-w-3xl mx-auto p-2 sm:p-0 markdown">
+   <h2 id="-introduction">✋🏽 Introduction</h2>
+<p>Hey guys, our last article covered the concepts of React - what it is, its functioning, and its significance. However, in today's article, we’ll focus on the step-by-step guide for installing and configuring React on our computer. This involves installing the necessary tools, understanding the basic project structure, and creating your very first React application. Let’s dive right in! 😉</p>
+<h2 id="installing-nodejs-and-a-code-editor"><strong>Installing Node.js and a Code Editor</strong></h2>
+<p>Before we dive into React, it's crucial to have Node.js and a reliable code editor installed on your system.</p>
+<h3 id="nodejs-installation"><strong>Node.js Installation</strong></h3>
+<p>Node.js is a JavaScript runtime that allows you to execute JavaScript code outside of a web browser. React relies on Node.js for package management and running scripts.</p>
+<ol>
+<li>
+<p><strong>Download Node.js</strong> Visit the official Node.js website (<a href="https://nodejs.org/">https://nodejs.org/</a>) and download the LTS (Long Term Support) version suitable for your operating system.</p>
+</li>
+<li>
+<p><strong>Install Node.js</strong> Follow the installation instructions provided on the website for your specific operating system.</p>
+</li>
+</ol>
+<h3 id="code-editor"><strong>Code Editor</strong></h3>
+<p>A code editor is where you'll spend most of your time writing and managing your React code. Popular choices include Visual Studio Code, Atom, and Sublime Text.</p>
+<ol>
+<li>
+<p><strong>Download a Code Editor:</strong> Choose a code editor and download it from the official website. Visual Studio Code (<a href="https://nodejs.org/">https://code.visualstudio.com</a>) is highly recommended for its extensive features and extensions.</p>
+</li>
+<li>
+<p><strong>Install the Code Editor:</strong> Follow the installation instructions provided for your chosen code editor.</p>
+</li>
+</ol>
+<p>Now that you have Node.js and a code editor installed, let's move on to setting up a React project.</p>
+<h2 id="using-create-react-app-cra-or-vite"><strong>Using Create React App (CRA) or Vite</strong></h2>
+<p>Creating a React application from scratch involves configuring various build tools, which can be time-consuming. Luckily, tools like Create React App (CRA) and Vite make this process much more straightforward.</p>
+<h3 id="create-react-app-cra"><strong>Create React App (CRA):</strong></h3>
+<p>CRA is a popular tool that sets up a new React project with a sensible default configuration, allowing you to focus on writing code rather than dealing with build configurations.</p>
+<ol>
+<li><strong>Install Create React App:</strong></li>
+</ol>
+<ul>
+<li>Create a New Project Directory</li>
+</ul>
+<p>Start by creating a new directory where you'll build your React application. Open your terminal and navigate to the directory where you want to create the project.</p>
+<pre><code class="language-javascript">cd path/to/your/project/directory
+</code></pre>
+<p>or you can also open the terminal on the code editor you use (Which I am guessing is Vs Code) by pressing <code>ctrl +</code> <strong>`</strong> and repeat the same process</p>
+<ul>
+<li>Create a New React App</li>
+</ul>
+<p>Now, you can create a new React application using <code>Create React App</code>. In your project directory, execute the following command 👇🏽</p>
+<pre><code class="language-javascript">npx create-react-app my-react-app
+</code></pre>
+<p>Make sure to replace <code>my-react-app</code> with your preferred app name. This will set up a new React application in a folder with the same name.</p>
+<p>You can also use the directory as your react app by simply executing this command 👇🏽</p>
+<pre><code class="language-javascript">npx create-react-app .
+</code></pre>
+<p>The period <code>.</code> simply means to use the default folder we are in to create the app.</p>
+<p>💡 <em>Once it has finish installing, you’ll notice that you have some new files (that is if you created the app from the vs code terminal) but if you ran the command from your terminal you’ll will be giving a some commands but we are going to be using just two of them in this article which will lead us to the next step.</em></p>
+<ul>
+<li><strong>Navigate to Your App's Directory</strong></li>
+</ul>
+<p>Navigate to the newly created app directory by executing this command 👇🏽</p>
+<pre><code class="language-javascript">cd my-react-app
+</code></pre>
+<p>When you are already in that directory, you can then press <code>ctrl + .</code> to open it on vs code before executing the last step. But if you are already on vs code you do not need to anything since you already on that folder.</p>
+<ul>
+<li><strong>Start the Development Server</strong></li>
+</ul>
+<p>To view your React application in the browser, start the development server by running this command 👇🏽</p>
+<pre><code class="language-javascript">npm start
+</code></pre>
+<p>This will launch your application and automatically open a new browser tab displaying the app's default page.</p>
+<h3 id="vite"><strong>Vite</strong></h3>
+<p>Vite is a build tool that aims to provide a faster development experience for React and other JavaScript frameworks.</p>
+<p><strong>Install Vite</strong></p>
+<p>Open your terminal and run the following command</p>
+<pre><code class="language-javascript">npm create vite@latest my-react-app -- --template react
+</code></pre>
+<ol>
+<li>
+<p>Replace &quot;my-react-app&quot; with the desired name of your project and follow the rest instructions which are really straightforward.</p>
+</li>
+<li>
+<p><strong>Navigate to Your Project</strong> Change into the project directory using</p>
+<pre><code class="language-javascript">cd my-react-app
+</code></pre>
+</li>
+<li>
+<p><strong>Start the Development Server:</strong></p>
+<p>Launch your React application with</p>
+<pre><code class="language-javascript">npm run dev
+</code></pre>
+</li>
+</ol>
+<h2 id="creating-your-first-react-application"><strong>Creating Your First React Application</strong></h2>
+<p>Now that your environment is set up, it's time to create your first React application. Open the project in your code editor and explore the generated files. The <code>src</code> folder contains the main React components, and the <code>public</code> folder holds static assets.</p>
+<p>Open the <code>src/App.js</code> file and start experimenting with React components. You can modify the existing code or create your own components to see how React works.</p>
+<h2 id="understanding-the-basic-project-structure"><strong>Understanding the Basic Project Structure</strong></h2>
+<p>A typical React project structure generated by CRA or Vite consists of several folders and files:</p>
+<ul>
+<li>
+<p><strong>public:</strong> Contains static assets like HTML files, images, and icons.</p>
+</li>
+<li>
+<p><strong>src:</strong> Holds the source code for your React application, including components, styles, and other JavaScript files.</p>
+</li>
+<li>
+<p><strong>node_modules:</strong> Stores third-party libraries and dependencies.</p>
+</li>
+<li>
+<p><strong>package.json:</strong> Defines your project's metadata and dependencies.</p>
+</li>
+<li>
+<p><a href="https://nodejs.org/"><strong>README.md</strong></a><strong>:</strong> Provides documentation and information about your project.</p>
+</li>
+<li>
+<p><strong>.gitignore:</strong> Lists files and directories to be ignored by Git during version control.</p>
+</li>
+<li>
+<p><strong>.env:</strong> Configuration file for environment variables.</p>
+</li>
+</ul>
+<p>Understanding this structure is essential for organizing and maintaining your React projects effectively.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>That’s it guys. You've successfully set up React on your machine and created a new React application 🎉 🎉. Now you're ready to start building dynamic and interactive user interfaces using the power of React. Stay tuned for the next article, where we'll explore JSX and basic components. Have a nice weekend and see you next week 😀</p>
+
+</div>
+
+   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+   
+   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/go.min.js"></script>
+
+   <script src="\assets\main.js?v=1"></script>
+
+   <script type="text/javascript">hljs.highlightAll();</script>
+</body>
+
+</html>
